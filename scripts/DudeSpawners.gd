@@ -10,14 +10,16 @@ var dude = preload("res://scenes/dude.tscn")
 
 func _ready():
 	rng.randomize()
-	timer.start()
+	spawn_dude()
 
 
 func _on_timer_timeout():
+	spawn_dude()
+
+func spawn_dude():
 	timer.start()
 	var score = GAME_MANAGER.get_score()
 	var dude_count = GAME_MANAGER.get_dude_count()
-	#if rng.randf() < (score * 0.1) + 1 and dude_count < 10:
 	if rng.randf() < 0.2 and dude_count < 10:
 		var new_dude = dude.instantiate()
 		new_dude.position.x = $".".position.x

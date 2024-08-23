@@ -9,8 +9,7 @@ extends Area2D
 
 func _ready():
 	rng.randomize()
-	timer.start()
-	sprite.hide()
+	spawn_fire()
 
 
 func _on_body_entered(body):
@@ -22,6 +21,10 @@ func _on_body_entered(body):
 
 
 func _on_timer_timeout():
+	spawn_fire()
+
+
+func spawn_fire():
 	timer.start()
 	var score = GAME_MANAGER.get_score()
 	var fire_count = GAME_MANAGER.get_fire_count()

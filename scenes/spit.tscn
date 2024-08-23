@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b4vxdthsalmeu"]
 
-[ext_resource type="Texture2D" uid="uid://7ofutlb4fj14" path="res://sprites/tilemap001.png" id="1_fsu0s"]
+[ext_resource type="Texture2D" uid="uid://dm50jfasvi5pr" path="res://sprites/tilemap001.png" id="1_fsu0s"]
 [ext_resource type="Script" path="res://scripts/spit.gd" id="1_qcnta"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rvdrx"]
@@ -64,12 +64,12 @@ script = ExtResource("1_qcnta")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 4
+position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_1jbrk")
 animation = &"splash"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_b8yd5")
 
 [node name="Timer" type="Timer" parent="."]

@@ -24,7 +24,6 @@ func increment_score(amount):
 
 func increment_dude_count(amount):
 	dude_count += amount
-	print(dude_count)
 
 
 func increment_fire_count(amount):

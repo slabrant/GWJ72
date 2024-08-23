@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b53ei5pw13olq"]
 
 [ext_resource type="Script" path="res://scripts/Dude.gd" id="1_4teeh"]
-[ext_resource type="Texture2D" uid="uid://7ofutlb4fj14" path="res://sprites/tilemap001.png" id="2_qerr6"]
+[ext_resource type="Texture2D" uid="uid://dm50jfasvi5pr" path="res://sprites/tilemap001.png" id="2_qerr6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wu3lo"]
 atlas = ExtResource("2_qerr6")
@@ -64,9 +64,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddwqe"]
 size = Vector2(22, 4)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsj0o"]
-radius = 6.0
-height = 32.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjpcw"]
+size = Vector2(12, 26)
 
 [node name="Dude" type="CharacterBody2D"]
 collision_layer = 4
@@ -112,8 +111,8 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -16)
-shape = SubResource("CapsuleShape2D_rsj0o")
+position = Vector2(0, -17)
+shape = SubResource("RectangleShape2D_mjpcw")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
