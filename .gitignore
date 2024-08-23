@@ -2,3 +2,4 @@
 .godot/
 .vscode
 *.png.import
+*.tmp
