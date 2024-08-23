@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://c2e5jhmof71xe"]
+
+[ext_resource type="Script" path="res://scripts/fire.gd" id="1_h5ww4"]
+[ext_resource type="Texture2D" uid="uid://7ofutlb4fj14" path="res://sprites/tilemap001.png" id="1_pn8hp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1bblo"]
+atlas = ExtResource("1_pn8hp")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv6vq"]
+atlas = ExtResource("1_pn8hp")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn0cm"]
+atlas = ExtResource("1_pn8hp")
+region = Rect2(64, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqbn8"]
+atlas = ExtResource("1_pn8hp")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjnlu"]
+atlas = ExtResource("1_pn8hp")
+region = Rect2(128, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tibww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1bblo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cv6vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn0cm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqbn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjnlu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u7d33"]
+
+[node name="Fire" type="Area2D"]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_h5ww4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_tibww")
+autoplay = "default"
+frame_progress = 0.306811
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_u7d33")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
