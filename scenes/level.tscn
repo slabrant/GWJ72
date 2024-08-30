@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=4 uid="uid://j0v84116lwr1"]
+[gd_scene load_steps=12 format=4 uid="uid://j0v84116lwr1"]
 
 [ext_resource type="PackedScene" uid="uid://ctbu5arrg4vv3" path="res://scenes/player.tscn" id="1_m7530"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="2_25w1w"]
-[ext_resource type="Texture2D" uid="uid://dm50jfasvi5pr" path="res://sprites/tilemap001.png" id="2_guqds"]
+[ext_resource type="Texture2D" uid="uid://dlcngk1ksbjbi" path="res://sprites/tilemap001.png" id="2_guqds"]
+[ext_resource type="FontFile" uid="uid://c4gf67djyt5vw" path="res://sprites/pixelized.ttf" id="2_qnv7t"]
 [ext_resource type="PackedScene" uid="uid://c2e5jhmof71xe" path="res://scenes/fire.tscn" id="3_77rac"]
 [ext_resource type="Script" path="res://scripts/ResetZone.gd" id="5_ooexq"]
 [ext_resource type="PackedScene" uid="uid://bl85gj3rmva4s" path="res://scenes/dude_spawners.tscn" id="6_kojgj"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qekou"]
+font = ExtResource("2_qnv7t")
+font_size = 15
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yw1kn"]
 texture = ExtResource("2_guqds")
@@ -97,6 +102,7 @@ offset_top = 65.0
 offset_right = 19.0
 offset_bottom = 90.0
 text = "Score: "
+label_settings = SubResource("LabelSettings_qekou")
 
 [node name="Player" parent="." instance=ExtResource("1_m7530")]
 unique_name_in_owner = true
