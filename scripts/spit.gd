@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var SPEED = 400.0
+@export var SPEED = 250.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sprite = $AnimatedSprite2D
 @onready var collision_shape = $CollisionShape2D

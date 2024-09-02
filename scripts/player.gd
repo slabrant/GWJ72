@@ -9,6 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var pointer_sprite = $PointerSprite
 @onready var quack1 = $Quack1
 @onready var is_spitting = false
+@onready var spit_power_time = 0.0
 var spit_scene = preload("res://scenes/spit.tscn")
 
 
@@ -25,8 +26,12 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		
 	var direction = Input.get_axis("move_left", "move_right")
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_just_released("shoot"):
 		spit($".")
+	if Input.is_action_pressed("shoot"):
+		pointer_sprite.scale.x = spit_power_time
+		if spit_power_time < 1.0:
+			spit_power_time += delta
 	
 	if direction:
 		body_sprite.flip_h = direction == -1
@@ -80,13 +85,14 @@ func spit(player):
 	var new_spit = spit_scene.instantiate()
 	new_spit.position.x = player.position.x
 	new_spit.position.y = player.position.y
-	new_spit.velocity = get_local_mouse_position().normalized() * new_spit.SPEED
+	new_spit.velocity = get_local_mouse_position().normalized() * (new_spit.SPEED + spit_power_time * 500)
 	body_sprite.play("spit")
 	mouth_sprite.play("spit")
 	mouth_sprite.connect("animation_finished", spit_end)
 	is_spitting = true
 	quack1.play()
 	player.add_sibling(new_spit)
+	spit_power_time = 0.0
 
 
 func spit_end():
@@ -95,3 +101,10 @@ func spit_end():
 	mouth_sprite.frame = 0
 	is_spitting = false
 	mouth_sprite.disconnect("animation_finished", spit_end)
+
+
+#func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	#if event.is_action("shoot") and !event.changed:
+		#spit_power_time += 0.1
+		#
+	#pass # Replace with function body.

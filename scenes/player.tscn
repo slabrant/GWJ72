@@ -637,4 +637,5 @@ libraries = {
 [node name="Quack1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_mdqka")
 
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="ready" from="." to="." method="_on_ready"]
