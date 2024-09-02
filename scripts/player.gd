@@ -4,47 +4,50 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -300.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var sprite = $DefaultSprite
+@onready var body_sprite = $DefaultSprite
+@onready var mouth_sprite = $MouthSprite
 @onready var pointer_sprite = $PointerSprite
-var spit = preload("res://scenes/spit.tscn")
+@onready var quack1 = $Quack1
+@onready var is_spitting = false
+var spit_scene = preload("res://scenes/spit.tscn")
 
 
 func _on_ready():
+	set_sprite('default')
 	pointer_sprite.offset.x = 32
 
 
 func _physics_process(delta):
-	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		
 	var direction = Input.get_axis("move_left", "move_right")
 	if Input.is_action_just_pressed("shoot"):
-		var new_spit = spit.instantiate()
-		new_spit.position.x = $".".position.x
-		new_spit.position.y = $".".position.y
-		new_spit.velocity = get_local_mouse_position().normalized() * new_spit.SPEED
-		# TODO: figure out spitting sprite.
-		sprite.play("spit")
-		$".".add_sibling(new_spit)
+		spit($".")
 	
 	if direction:
-		sprite.flip_h = direction == -1
+		body_sprite.flip_h = direction == -1
+		mouth_sprite.flip_h = direction == -1
 		velocity.x = direction * SPEED
 		pointer_sprite.offset.x = 32
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	if !is_on_floor():
-		sprite.play("jump")
+		body_sprite.play("jump")
+		if !is_spitting:
+			mouth_sprite.play("jump")
 	elif direction:
-		sprite.play("walk")
+		body_sprite.play("walk")
+		if !is_spitting:
+			mouth_sprite.play("walk")
 	else:
-		sprite.play("idle")
+		body_sprite.play("idle")
+		if !is_spitting:
+			mouth_sprite.play("idle")
 	
 	pointer_sprite.rotation = get_local_mouse_position().normalized().angle()
 	
@@ -52,19 +55,43 @@ func _physics_process(delta):
 
 
 func set_sprite(type):
-	
-	var flip_h = sprite.flip_h
+	var flip_h = body_sprite.flip_h
 	if type == 'dark':
-		sprite.hide()
-		sprite = $DarkSprite
-		sprite.show()
+		body_sprite.hide()
+		body_sprite = $DarkSprite
+		body_sprite.show()
 	elif type == 'light':
-		sprite.hide()
-		sprite = $LightSprite
-		sprite.show()
+		body_sprite.hide()
+		body_sprite = $LightSprite
+		body_sprite.show()
+	elif type == 'spidermxn':
+		body_sprite.hide()
+		body_sprite = $SpidermxnSprite
+		body_sprite.show()
 	else:
-		sprite.hide()
-		sprite = $DefaultSprite
-		sprite.show()
+		body_sprite.hide()
+		body_sprite = $DefaultSprite
+		body_sprite.show()
 	
-	sprite.flip_h = flip_h
+	body_sprite.flip_h = flip_h
+
+
+func spit(player):
+	var new_spit = spit_scene.instantiate()
+	new_spit.position.x = player.position.x
+	new_spit.position.y = player.position.y
+	new_spit.velocity = get_local_mouse_position().normalized() * new_spit.SPEED
+	body_sprite.play("spit")
+	mouth_sprite.play("spit")
+	mouth_sprite.connect("animation_finished", spit_end)
+	is_spitting = true
+	quack1.play()
+	player.add_sibling(new_spit)
+
+
+func spit_end():
+	mouth_sprite.play("idle")
+	body_sprite.frame = 0
+	mouth_sprite.frame = 0
+	is_spitting = false
+	mouth_sprite.disconnect("animation_finished", spit_end)
