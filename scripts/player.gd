@@ -15,7 +15,6 @@ var spit_scene = preload("res://scenes/spit.tscn")
 
 func _on_ready():
 	set_sprite('default')
-	pointer_sprite.offset.x = 32
 
 
 func _physics_process(delta):
@@ -29,7 +28,13 @@ func _physics_process(delta):
 	if Input.is_action_just_released("shoot"):
 		spit($".")
 	if Input.is_action_pressed("shoot"):
-		pointer_sprite.scale.x = spit_power_time
+		pointer_sprite.show()
+		if spit_power_time < 0.5:
+			pointer_sprite.frame = 0
+		elif spit_power_time < 1.0:
+			pointer_sprite.frame = 1
+		else:
+			pointer_sprite.frame = 2
 		if spit_power_time < 1.0:
 			spit_power_time += delta
 	
@@ -85,7 +90,7 @@ func spit(player):
 	var new_spit = spit_scene.instantiate()
 	new_spit.position.x = player.position.x
 	new_spit.position.y = player.position.y
-	new_spit.velocity = get_local_mouse_position().normalized() * (new_spit.SPEED + spit_power_time * 500)
+	new_spit.velocity = get_local_mouse_position().normalized() * (new_spit.SPEED + spit_power_time * 350)
 	body_sprite.play("spit")
 	mouth_sprite.play("spit")
 	mouth_sprite.connect("animation_finished", spit_end)
@@ -93,6 +98,7 @@ func spit(player):
 	quack1.play()
 	player.add_sibling(new_spit)
 	spit_power_time = 0.0
+	pointer_sprite.hide()
 
 
 func spit_end():
@@ -101,10 +107,3 @@ func spit_end():
 	mouth_sprite.frame = 0
 	is_spitting = false
 	mouth_sprite.disconnect("animation_finished", spit_end)
-
-
-#func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	#if event.is_action("shoot") and !event.changed:
-		#spit_power_time += 0.1
-		#
-	#pass # Replace with function body.

@@ -1,12 +1,25 @@
-[gd_scene load_steps=70 format=3 uid="uid://ctbu5arrg4vv3"]
+[gd_scene load_steps=74 format=3 uid="uid://ctbu5arrg4vv3"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdibj"]
 [ext_resource type="Texture2D" uid="uid://dlcngk1ksbjbi" path="res://sprites/tilemap001.png" id="2_8anoj"]
 [ext_resource type="AudioStream" uid="uid://6ul6xdmmwc8b" path="res://audio/quack1.mp3" id="3_mdqka"]
+[ext_resource type="Script" path="res://scripts/pointer_sprite.gd" id="3_ym8xj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4fe0"]
 atlas = ExtResource("2_8anoj")
 region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tedl2"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emipy"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeeaw"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(352, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tq3rb"]
 animations = [{
@@ -16,6 +29,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tedl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emipy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xeeaw")
+}],
+"loop": false,
+"name": &"levels",
 "speed": 5.0
 }]
 
@@ -594,7 +621,11 @@ collision_layer = 2
 script = ExtResource("1_rdibj")
 
 [node name="PointerSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_tq3rb")
+animation = &"levels"
+autoplay = "levels"
+script = ExtResource("3_ym8xj")
 
 [node name="DefaultSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w2r42")
