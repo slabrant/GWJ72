@@ -14,5 +14,9 @@ func _process(delta):
 
 func _on_area_2d_body_entered(body):
 	if body.name == 'Player':
-		get_tree().reload_current_scene()
-	body.queue_free()
+		body.health -=1
+		body.position = body.original_position
+		if body.health < 1:
+			get_tree().reload_current_scene()
+	else:
+		body.queue_free()

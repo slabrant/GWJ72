@@ -7,17 +7,29 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var body_sprite = $DefaultSprite
 @onready var mouth_sprite = $MouthSprite
 @onready var pointer_sprite = $PointerSprite
+@onready var health_sprite = $HealthSprite
 @onready var quack1 = $Quack1
 @onready var is_spitting = false
 @onready var spit_power_time = 0.0
+@onready var original_position = Vector2(0,0)
 var spit_scene = preload("res://scenes/spit.tscn")
+
+@export var health: int = 3:
+	set(value):
+		health = value
+		health_sprite.frame = value
+	get():
+		return health
 
 
 func _on_ready():
 	set_sprite('default')
+	original_position = position
+	health_sprite.frame = 3
 
 
 func _physics_process(delta):
+	print(position)
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -62,6 +74,10 @@ func _physics_process(delta):
 	pointer_sprite.rotation = get_local_mouse_position().normalized().angle()
 	
 	move_and_slide()
+
+
+func increment_health(amount):
+	health += amount
 
 
 func set_sprite(type):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://ctbu5arrg4vv3"]
+[gd_scene load_steps=79 format=3 uid="uid://ctbu5arrg4vv3"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rdibj"]
 [ext_resource type="Texture2D" uid="uid://dlcngk1ksbjbi" path="res://sprites/tilemap001.png" id="2_8anoj"]
@@ -616,6 +616,42 @@ _data = {
 "player_mouth": SubResource("Animation_3hbg7")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjgij"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(0, 224, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvf70"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(0, 240, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqalm"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(48, 224, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf6wa"]
+atlas = ExtResource("2_8anoj")
+region = Rect2(48, 240, 48, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2vjkw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjgij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvf70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqalm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf6wa")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_rdibj")
@@ -667,6 +703,12 @@ libraries = {
 
 [node name="Quack1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_mdqka")
+
+[node name="HealthSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -22)
+scale = Vector2(0.625, 0.625)
+sprite_frames = SubResource("SpriteFrames_2vjkw")
+autoplay = "default"
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="ready" from="." to="." method="_on_ready"]
