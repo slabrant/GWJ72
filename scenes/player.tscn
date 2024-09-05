@@ -705,7 +705,7 @@ libraries = {
 stream = ExtResource("3_mdqka")
 
 [node name="HealthSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -22)
+position = Vector2(1, -22)
 scale = Vector2(0.625, 0.625)
 sprite_frames = SubResource("SpriteFrames_2vjkw")
 autoplay = "default"
