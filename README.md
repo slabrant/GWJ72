@@ -3,7 +3,7 @@
 ## Issues/Ideas
 
 ### QOL
-- Health
+- Mushroom clouds
 - Keybinding
 - Parabola
 - Powerups
