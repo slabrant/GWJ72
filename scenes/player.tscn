@@ -152,9 +152,8 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4yqpl"]
-radius = 2.0
-height = 18.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n2r6"]
+size = Vector2(25, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqk38"]
 atlas = ExtResource("2_8anoj")
@@ -669,9 +668,9 @@ animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 14)
+position = Vector2(-0.999991, 3.5)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_4yqpl")
+shape = SubResource("RectangleShape2D_7n2r6")
 
 [node name="DarkSprite" type="AnimatedSprite2D" parent="."]
 visible = false
