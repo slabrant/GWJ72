@@ -2,12 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://ctbu5arrg4vv3" path="res://scenes/player.tscn" id="1_m7530"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="2_25w1w"]
-[ext_resource type="FontFile" uid="uid://cmbbopn5456vc" path="res://sprites/pixelized.ttf" id="2_fekgt"]
-[ext_resource type="Texture2D" uid="uid://cdq8jmbrwonwn" path="res://sprites/tilemap001.png" id="2_guqds"]
+[ext_resource type="FontFile" uid="uid://c4gf67djyt5vw" path="res://sprites/pixelized.ttf" id="2_fekgt"]
+[ext_resource type="Texture2D" uid="uid://dlcngk1ksbjbi" path="res://sprites/tilemap001.png" id="2_guqds"]
 [ext_resource type="PackedScene" uid="uid://c2e5jhmof71xe" path="res://scenes/fire.tscn" id="3_77rac"]
 [ext_resource type="Script" path="res://scripts/ResetZone.gd" id="5_ooexq"]
 [ext_resource type="PackedScene" uid="uid://bl85gj3rmva4s" path="res://scenes/dude_spawners.tscn" id="6_kojgj"]
-[ext_resource type="PackedScene" uid="uid://cnqrq3wp3smct" path="res://scenes/key_binding_menu.tscn" id="7_7jc8p"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_r4itm"]
 font = ExtResource("2_fekgt")
@@ -395,7 +394,6 @@ z_index = 10
 position = Vector2(-16, 16)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-visible = false
 position = Vector2(0, 10)
 zoom = Vector2(2, 2)
 limit_left = -704
@@ -486,8 +484,6 @@ position = Vector2(-557, 64)
 
 [node name="DudeSpawners7" parent="Spawners" instance=ExtResource("6_kojgj")]
 position = Vector2(-108, 32)
-
-[node name="KeyBindingMenu" parent="." instance=ExtResource("7_7jc8p")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(64, 96)
