@@ -2,14 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://ctbu5arrg4vv3" path="res://scenes/player.tscn" id="1_m7530"]
 [ext_resource type="Script" path="res://scripts/Manager.gd" id="2_25w1w"]
-[ext_resource type="Texture2D" uid="uid://dlcngk1ksbjbi" path="res://sprites/tilemap001.png" id="2_guqds"]
-[ext_resource type="FontFile" uid="uid://c4gf67djyt5vw" path="res://sprites/pixelized.ttf" id="2_qnv7t"]
+[ext_resource type="FontFile" uid="uid://cmbbopn5456vc" path="res://sprites/pixelized.ttf" id="2_fekgt"]
+[ext_resource type="Texture2D" uid="uid://cdq8jmbrwonwn" path="res://sprites/tilemap001.png" id="2_guqds"]
 [ext_resource type="PackedScene" uid="uid://c2e5jhmof71xe" path="res://scenes/fire.tscn" id="3_77rac"]
 [ext_resource type="Script" path="res://scripts/ResetZone.gd" id="5_ooexq"]
 [ext_resource type="PackedScene" uid="uid://bl85gj3rmva4s" path="res://scenes/dude_spawners.tscn" id="6_kojgj"]
+[ext_resource type="PackedScene" uid="uid://cnqrq3wp3smct" path="res://scenes/key_binding_menu.tscn" id="7_7jc8p"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_qekou"]
-font = ExtResource("2_qnv7t")
+[sub_resource type="LabelSettings" id="LabelSettings_r4itm"]
+font = ExtResource("2_fekgt")
 font_size = 15
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yw1kn"]
@@ -385,8 +386,8 @@ offset_left = -95.0
 offset_top = 65.0
 offset_right = 19.0
 offset_bottom = 90.0
-text = "Score: "
-label_settings = SubResource("LabelSettings_qekou")
+text = "Score:"
+label_settings = SubResource("LabelSettings_r4itm")
 
 [node name="Player" parent="." instance=ExtResource("1_m7530")]
 unique_name_in_owner = true
@@ -485,6 +486,8 @@ position = Vector2(-557, 64)
 
 [node name="DudeSpawners7" parent="Spawners" instance=ExtResource("6_kojgj")]
 position = Vector2(-108, 32)
+
+[node name="KeyBindingMenu" parent="." instance=ExtResource("7_7jc8p")]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(64, 96)

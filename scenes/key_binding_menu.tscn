@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnqrq3wp3smct"]
+
+[ext_resource type="Script" path="res://scripts/key_binding_menu.gd" id="1_hljev"]
+
+[node name="KeyBindingMenu" type="Window"]
+auto_translate_mode = 1
+position = Vector2i(0, 36)
+script = ExtResource("1_hljev")
+
+[node name="MenuButton" type="MenuButton" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="window_input" from="." to="." method="_on_window_input"]
